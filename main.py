@@ -55,6 +55,7 @@ def getAudio(audioname, content):
 
 @app.route("/images/<imagename>")
 def getImage(imagename):
+    imagename = imagename.replace("%20", " ")
     return send_file(f"./images/{imagename}.png", as_attachment=True)
 
 
