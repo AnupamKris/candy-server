@@ -1,0 +1,6 @@
+python-dotenv
+elevenlabs
+flask
+flask-cors
+bcrypt
+tinydb
