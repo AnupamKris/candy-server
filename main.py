@@ -108,7 +108,9 @@ def getData():
 
 @app.route("/save", methods=["POST"])
 def saveData():
-    rawdata = eval(request.form["data"])
+    rawdata = eval(
+        request.form["data"].replace("false", "False").replace("true", "True")
+    )
     data = rawdata["data"]
     name = rawdata["name"]
 
