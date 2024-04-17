@@ -24,6 +24,8 @@ client = ElevenLabs(
 
 voice_id = "jsCqWAovK2LkecY7zXl4"
 
+print("Starting Server: keys loaded")
+
 
 @app.route("/audio/<audioname>/<content>")
 def getAudio(audioname, content):
