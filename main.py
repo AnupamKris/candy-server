@@ -30,8 +30,11 @@ print("Starting Server: keys loaded")
 @app.route("/audio/<audioname>/<content>")
 def getAudio(audioname, content):
     print(audioname, content)
+    audioname = audioname.replace("%20", " ")
+    content = content.replace("%20", " ")
     if os.path.exists(f"./audios/{audioname.lower()}.mp3"):
         return send_file(f"./audios/{audioname.lower()}.mp3", as_attachment=True)
+
     else:
         if audioname.split("-")[-1] == "definition":
             audio = client.generate(text=content, voice=voice_id)
