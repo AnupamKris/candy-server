@@ -56,7 +56,13 @@ def getAudio(audioname, content):
 @app.route("/images/<imagename>")
 def getImage(imagename):
     imagename = imagename.replace("%20", " ")
-    return send_file(f"./images/{imagename}.png", as_attachment=True)
+    if os.path.exists(f"./images/{imagename}.png"):
+        return send_file(f"./images/{imagename}.png", as_attachment=True)
+    else:
+        return (
+            jsonify({"error": "Image not found", "path": f"./images/{imagename}.png"}),
+            404,
+        )
 
 
 @app.route("/authenticate", methods=["POST"])
