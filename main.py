@@ -92,18 +92,20 @@ def getData():
     q = Query()
     req = request.json
     name = req["name"]
-    grade = req["grade"]
-    theme = req["theme"]
-    data = db.search(where("name") == name)
+    grade = int(req["grade"])
+    theme = int(req["theme"])
+    data = dict(db.search(where("name") == name)[0])
 
     # get words where data.data.number = grade and data.data.themes[x].name = theme
-    for i in data[0]["data"]:
-        if i["number"] == grade:
-            for j in i["themes"]:
-                if j["name"] == theme:
-                    return jsonify(j["words"]), 200
+    return jsonify(data["data"][grade]["themes"][theme]["words"]), 200
+    # for i in data["data"]:
+    #     if i["number"] == grade:
+    #         for j in i["themes"]:
+    #             if j["name"] == theme:
+    #                 print(j)
+    #                 return jsonify(j["words"]), 200
 
-    return jsonify([]), 200
+    # return jsonify([]), 200
 
 
 @app.route("/save", methods=["POST"])
