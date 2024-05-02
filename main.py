@@ -108,6 +108,13 @@ def getData():
     # return jsonify([]), 200
 
 
+@app.route("/getAllAudios", methods=["POST"])
+def getAllAudios():
+    # zip all files with subprocess
+    os.system("zip -r audios.zip ./audios")
+    return send_file("audios.zip", as_attachment=True)
+
+
 @app.route("/save", methods=["POST"])
 def saveData():
     rawdata = eval(
